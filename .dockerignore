@@ -17,4 +17,3 @@ venv
 *.md
 tests
 .pytest_cache
-alembic/versions/*.py
