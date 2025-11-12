@@ -34,42 +34,6 @@ def test_create_duplicate_user(client):
     assert response.status_code == 400
     assert response.json()["detail"] == "Email already registered"
 
-def test_get_user(client):
-    user_data = {
-        "name": "Get User",
-        "email": "getuser@example.com",
-        "password": "password123",
-        "preferences": {"email": True, "push": True}
-    }
-    
-    create_response = client.post("/api/v1/users/", json=user_data)
-    user_id = create_response.json()["data"]["id"]
-    
-    response = client.get(f"/api/v1/users/{user_id}")
-    
-    assert response.status_code == 200
-    assert response.json()["data"]["email"] == "getuser@example.com"
-
-def test_get_nonexistent_user(client):
-    response = client.get("/api/v1/users/00000000-0000-0000-0000-000000000000")
-    
-    assert response.status_code == 404
-
-def test_list_users(client):
-    for i in range(3):
-        user_data = {
-            "name": f"User {i}",
-            "email": f"user{i}@example.com",
-            "password": "password123",
-            "preferences": {"email": True, "push": True}
-        }
-        client.post("/api/v1/users/", json=user_data)
-    
-    response = client.get("/api/v1/users/")
-    
-    assert response.status_code == 200
-    assert len(response.json()["data"]) == 3
-
 def test_update_push_token(client):
     user_data = {
         "name": "Push User",

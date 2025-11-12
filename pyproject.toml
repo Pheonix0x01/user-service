@@ -17,6 +17,7 @@ dependencies = [
     "python-multipart",
     "prometheus-client",
     "prometheus-fastapi-instrumentator",
+    "pytest>=9.0.1",
 ]
 
 [project.optional-dependencies]
