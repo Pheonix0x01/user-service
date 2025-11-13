@@ -35,3 +35,5 @@ def client():
         yield c
     Base.metadata.drop_all(bind=engine)
     fake_redis.flushall()
+
+    #trigger ci
